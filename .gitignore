@@ -1,0 +1,33 @@
+# Python files
+*.pyc
+__pycache__/
+
+# Logs
+*.log
+
+# Database files
+*.sqlite3
+*.db
+
+# Test Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node modules
+node_modules/
+
+# Ignore IDE and editor files
+.vscode/*
+
+# Ignore project structure markdown file
+project_structure.md
+
+# Ignore dotenv files
+.env.*
+!.env.shared
+
+# Distribution / Packages
+dist/
+build/
+*.egg-info/

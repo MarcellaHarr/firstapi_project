@@ -2,7 +2,7 @@
 
 # Import modules
 from sqlalchemy import Column, Integer, String
-from database import Base
+from app.dbbase import Base
 
 # Create Pokemon model
 class Pokemon(Base):

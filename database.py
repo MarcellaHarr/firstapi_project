@@ -3,7 +3,8 @@
 # Import modules
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.models import Base, Pokemon
+from app.dbbase import Base
+from app.models import Pokemon
 from app.envconfig import construct_db_uri
 
 DATABASE_URL = construct_db_uri()

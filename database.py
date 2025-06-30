@@ -1,12 +1,13 @@
 # Configuration database (database URI, etc.)
 
 # Import modules
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from app.dbbase import Base
 from app.models import Pokemon
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine, func
 from app.envconfig import construct_db_uri
 
+# Declare DB URI, Engine, and SessionLocal
 DATABASE_URL = construct_db_uri()
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
@@ -29,12 +30,15 @@ def save_pokemon_list(data):
     with SessionLocal() as session:
       # Loop through each Pokémon in the data
       for column in data:
-        # Check if the Pokémon already exists in the database
-        existing = session.query(Pokemon).filter_by(id=column.get('id')).first()
+        # Check if the Pokémon already exists by ID & Name
+        existing = session.query(Pokemon).filter(
+          (Pokemon.id == column.get('id')) |
+          (func.lower(Pokemon.name) == column.get('name').lower()) 
+        ).first()
 
         # If it exists, skip adding it
         if existing:
-          print(f"⚠️ Pokémon ID {column.get('id')} ({column.get('name')}) already exists. Skipping.")
+          print(f"⚠️ Pokémon with ID {column.get('id')} or name '{column.get('name')}' already exists. Skipping.")
           continue
 
         # If it doesn't exist, create a new Pokémon record

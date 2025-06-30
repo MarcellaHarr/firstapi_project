@@ -26,4 +26,4 @@ if __name__ == '__main__':
             continue
 
     # Handle the input and fetch Pokémon data
-    fetch_and_store_pokemon()
+    fetch_and_store_pokemon(user_input)

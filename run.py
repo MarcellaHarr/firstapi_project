@@ -1,10 +1,12 @@
-# `run.py` This script is used to run the application by importing the main 
+# This script is used to run the application by importing the main 
 # function from the apiconfig
+"""
+Entry point to launch the application.
+It fetches a Pokémon via user input, saves it to PostgreSQL, and displays all stored Pokémon.
+"""
 
-# Import modules
-from app import apiconfig
+# Import main controller logic from the app
+from app.routes.api_views import fetch_and_store_pokemon
 
-# Entry point of the application to directly run the main function from apiconfig
 if __name__ == '__main__':
-    apiconfig.main()
-    # The main function is called to start the application.
+    fetch_and_store_pokemon()

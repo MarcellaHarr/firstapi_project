@@ -20,49 +20,53 @@ def init_db():
 
 # 2. Insert Pokémon records into PostgreSQL
 def save_pokemon_list(data):
-  session = SessionLocal()
   added_count = 0
 
-  # Check if the table exists, if not, create it
+  # 
   try:
-    for column in data:
-      existing = session.query(Pokemon).filter_by(id=column.get('id')).first()
-      if existing:
-        print(f"⚠️ Pokémon ID {column.get('id')} ({column.get('name')}) already exists. Skipping.")
-        continue
+    # Check for existing Pokémon before adding new ones
+    with SessionLocal() as session:
+      # Loop through each Pokémon in the data
+      for column in data:
+        # Check if the Pokémon already exists in the database
+        existing = session.query(Pokemon).filter_by(id=column.get('id')).first()
 
-      pokemon = Pokemon(
-          id = column.get('id'),
-          name = column.get('name'),
-          height = column.get('height'),
-          weight = column.get('weight')
-      )
-      session.add(pokemon)
-      added_count += 1
+        # If it exists, skip adding it
+        if existing:
+          print(f"⚠️ Pokémon ID {column.get('id')} ({column.get('name')}) already exists. Skipping.")
+          continue
 
-    session.commit()
-    print(f"{added_count} new Pokémon added to the database.")
+        # If it doesn't exist, create a new Pokémon record
+        pokemon = Pokemon(
+            id=column.get('id'),
+            name=column.get('name'),
+            height=column.get('height'),
+            weight=column.get('weight')
+        )
 
-  # Handle any exceptions that occur during the transaction
+        # Add the new Pokémon to the session
+        session.add(pokemon)
+        added_count += 1
+
+      # Commit the session to save changes to the database
+      session.commit()
+      print(f"{added_count} new Pokémon added to the database.")
+
+  # Handle any exceptions that occur during the database operations
   except Exception as e:
-    session.rollback()
     print("Error saving data:", e)
 
-  # Ensure the session is closed
-  finally:
-    session.close()
 
-
-# 5. Query and display stored Pokémon
+# 3. Query and display stored Pokémon
 def show_all_pokemon():
-  # Create a new session
-  session = SessionLocal()
+  # Query all Pokémon from the database
+  print("Fetching all Pokémon from the database...")
 
-  # Query all Pokémon records
-  try:
+  # Better session handling using context manager
+  with SessionLocal() as session:
+    # Fetch all Pokémon records
     pokemon = session.query(Pokemon).all()
+    # Loop through each Pokémon and print its details
     for character in pokemon:
       print(f"RECORD #{character.id}: {character.name}")
-  finally:
-    session.close()
 

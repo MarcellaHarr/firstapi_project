@@ -14,16 +14,16 @@ SessionLocal = sessionmaker(bind=engine)
 
 # 1. Create tables from models
 def init_db():
-    print("Creating tables...")
+    print("Creating tables...\n")
     Base.metadata.create_all(bind=engine)
-    print("Tables created.")
+    print("Tables created.\n")
 
 
 # 2. Insert Pokémon records into PostgreSQL
 def save_pokemon_list(data):
   added_count = 0
 
-  # 
+  # Use try-except to handle potential errors during database operations
   try:
     # Check for existing Pokémon before adding new ones
     with SessionLocal() as session:

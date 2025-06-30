@@ -2,8 +2,8 @@
 # storing it in the PostgreSQL database.
 
 # Import modules
-from ...database import save_pokemon_list, show_all_pokemon, init_db
-from ..apiconfig import get_pokemon_info
+from database import save_pokemon_list, show_all_pokemon, init_db
+from app.apiconfig import get_pokemon_info
 
 # Function to fetch Pokémon data from the PokeAPI and store it in the database
 def fetch_and_store_pokemon():

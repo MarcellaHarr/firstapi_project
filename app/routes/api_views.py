@@ -6,17 +6,11 @@ from database import save_pokemon_list, show_all_pokemon
 from app.apiconfig import get_pokemon_info
 
 # Function to fetch Pokémon data from the PokeAPI and store it in the database
-def fetch_and_store_pokemon():
-  # Prompt the user for a Pokémon name
+def fetch_and_store_pokemon(name):
+  # Greet the user
   print("Welcome to the Pokémon Database!\n")
-  name = input("Enter the name of a Pokémon to store in the database: ").lower().strip()
 
-  # Check if the name is provided
-  if not name:
-    print("No Pokémon name provided.")
-    return
-
-  # Fetch Pokémon data from the PokeAPI
+  # Fetch the Pokémon name from user input
   print(f"Fetching data for Pokémon: {name}...\n")
   pokemon_data = get_pokemon_info(name)
 

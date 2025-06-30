@@ -51,7 +51,7 @@ def save_pokemon_list(data):
 
       # Commit the session to save changes to the database
       session.commit()
-      print(f"{added_count} new Pokémon added to the database.")
+      print(f"{added_count} new Pokémon added to the database.\n")
 
   # Handle any exceptions that occur during the database operations
   except Exception as e:
@@ -61,7 +61,7 @@ def save_pokemon_list(data):
 # 3. Query and display stored Pokémon
 def show_all_pokemon():
   # Query all Pokémon from the database
-  print("Fetching all Pokémon from the database...")
+  print("Fetching all Pokémon from the database...\n")
 
   # Better session handling using context manager
   with SessionLocal() as session:

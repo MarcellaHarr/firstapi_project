@@ -43,24 +43,4 @@ def get_pokemon_info(name):
   # 17. Another return but for the case of an exception
   return None
 
-
-def main():
-  # 4. Set the name of the pokemon
-  pokemon_name = input("Enter the name of the pokemon: ").lower()
-
-  # 5. Call function to get the pokemon set and store the result to a variable
-  pokemon_info = get_pokemon_info(pokemon_name)
-
-  # 14. Check if pokemon dictionary is not empty
-  if pokemon_info:
-      # Print the pokemon details
-      print(f"Pokemon's Name: {pokemon_info['name'].capitalize()}")
-      print(f"Pokemon's ID: {pokemon_info['id']}")
-      print(f"Pokemon's Height: {pokemon_info['height']} decimetres.")
-      print(f"Pokemon's Weight: {pokemon_info['weight']} hectograms.")
-  # 15. if not successful, print a message
-  else:
-      print("No data found for the specified pokemon.")
-
-
 # 18. End of the script
